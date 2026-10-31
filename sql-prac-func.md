@@ -59,3 +59,30 @@ SELECT \
   COUNT(*) AS total_admissions \
 FROM admissions \
 WHERE patient_id = 579;
+
+#### 5. Display every patient's first_name.Order the list by the length of each name and then by alphabetically.
+
+**Solution**
+
+select first_name
+from patients
+order by len(first_name), first_name asc
+
+#### 6. Show the total amount of male patients and the total amount of female patients in the patients table.Display the two results in the same row.
+
+**Solution**
+
+SELECT 
+  (SELECT count(*) FROM patients WHERE gender='M') AS male_count, 
+  (SELECT count(*) FROM patients WHERE gender='F') AS female_count;
+
+SELECT 
+  SUM(Gender = 'M') as male_count, 
+  SUM(Gender = 'F') AS female_count
+FROM patients
+
+select 
+  sum(case when gender = 'M' then 1 end) as male_count,
+  sum(case when gender = 'F' then 1 end) as female_count 
+from patients;
+
