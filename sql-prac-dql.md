@@ -97,3 +97,37 @@ WHERE occurrencies = 1
 select patient_id, first_name\
 from patients\
 where first_name like 's____%s'
+
+#### 10. Show first and last name, allergies from patients which have allergies to either 'Penicillin' or 'Morphine'. Show results ordered ascending by allergies then by first_name then by last_name.
+
+**Solution**
+
+select first_name, last_name, allergies\
+from patients\
+where allergies = 'Penicillin' or allergies ='Morphine'\
+order by allergies asc, first_name asc, last_name asc
+
+SELECT\
+  first_name,\
+  last_name,\
+  allergies\
+FROM patients\
+WHERE\
+  allergies IN ('Penicillin', 'Morphine')\
+ORDER BY\
+  allergies,\
+  first_name,\
+  last_name;
+
+#### 11. Show patient_id, diagnosis from admissions. Find patients admitted multiple times for the same diagnosis.
+
+**Solution**
+
+SELECT
+  patient_id,
+  diagnosis
+FROM admissions
+GROUP BY
+  patient_id,
+  diagnosis
+HAVING COUNT(*) > 1;
