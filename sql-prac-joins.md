@@ -42,3 +42,14 @@ WHERE 'Dementia' IN ( \
     FROM admissions \
     WHERE admissions.patient_id = p.patient_id \
   ); \
+
+
+#### 3. Show first name, last name and role of every person that is either patient or doctor.The roles are either "Patient" or "Doctor"
+
+**Solution**
+
+SELECT first_name, last_name, "Patient" as role \
+FROM patients\
+union all \
+SELECT first_name, last_name, "Doctor" as role\
+FROM doctors
