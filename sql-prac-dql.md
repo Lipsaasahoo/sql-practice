@@ -143,3 +143,33 @@ FROM patients\
 GROUP BY city\
 ORDER BY num_patients DESC, city asc;
 
+#### 13. Show all allergies ordered by popularity. Remove NULL values from query.
+
+**Solution**
+
+SELECT\
+  allergies,\
+  count(allergies) AS total_diagnosis\
+FROM patients\
+GROUP BY allergies\
+HAVING\
+  allergies IS NOT NULL\
+ORDER BY total_diagnosis DESC
+
+
+SELECT\
+  allergies,\
+  count(allergies) AS total_diagnosis\
+FROM patients\
+GROUP BY allergies\
+HAVING\
+  allergies IS NOT NULL\
+ORDER BY total_diagnosis DESC
+
+SELECT\
+  allergies,\
+  count(*)\
+FROM patients\
+WHERE allergies NOT NULL\
+GROUP BY allergies\
+ORDER BY count(*) DESC
