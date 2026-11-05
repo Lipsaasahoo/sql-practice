@@ -229,3 +229,61 @@ SELECT\
   (MAX(weight) - MIN(weight)) AS weight_delta\
 FROM patients\
 WHERE last_name = 'Maroni';
+
+#### 18. Show all of the days of the month (1-31) and how many admission_dates occurred on that day. Sort by the day with most admissions to least admissions.
+
+**Solution**
+
+select Day(admission_date) as day_number, count(*) as number_of_admissions \
+from admissions \
+group by day_number \
+order by number_of_admissions desc
+
+#### 19. Show all columns for patient_id 542's most recent admission_date.
+
+**Solution**
+
+SELECT * \ 
+FROM admissions \
+WHERE patient_id = 542 \
+ORDER BY admission_date DESC \
+LIMIT 1
+
+SELECT * \
+FROM admissions \
+GROUP BY patient_id \
+HAVING\
+  patient_id = 542 \
+  AND max(admission_date)
+
+SELECT *\
+FROM admissions \
+WHERE patient_id = 542 \
+GROUP BY patient_id \
+HAVING \
+  admission_date = MAX(admission_date); \
+
+#### 20. Show patient_id, attending_doctor_id, and diagnosis for admissions that match one of the two criteria: 1. patient_id is an odd number and attending_doctor_id is either 1, 5, or 19. 2. attending_doctor_id contains a 2 and the length of patient_id is 3 characters.
+
+**Solution**
+
+select patient_id, attending_doctor_id, diagnosis \
+from admissions \
+where (patient_id % 2 is not 0 and attending_doctor_id in (1,5,19)) or \
+  (attending_doctor_id like "%2%" AND patient_id like "___") \
+
+SELECT \
+  patient_id, \
+  attending_doctor_id, \
+  diagnosis \
+FROM admissions \
+WHERE \
+  ( \
+    attending_doctor_id IN (1, 5, 19) \
+    AND patient_id % 2 != 0 \
+  ) \
+  OR \
+  ( \
+    attending_doctor_id LIKE '%2%' \
+    AND len(patient_id) = 3 \
+  )
