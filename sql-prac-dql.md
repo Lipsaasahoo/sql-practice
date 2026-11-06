@@ -287,3 +287,35 @@ WHERE \
     attending_doctor_id LIKE '%2%' \
     AND len(patient_id) = 3 \
   )
+
+#### 21. Show first_name, last_name, and the total number of admissions attended for each doctor.Every admission has been attended by a doctor.
+
+**Solution**
+
+select first_name, last_name, count(*) as admissions_total\
+from doctors \
+join admissions \
+on doctors.doctor_id = admissions.attending_doctor_id \
+group by attending_doctor_id
+
+#### 22. For each doctor, display their id, full name, and the first and last admission date they attended.
+
+**Solution**
+
+select doctor_id, concat(first_name, ' ', last_name) as full_name, \
+min(admission_date) as first_admission_date, max(admission_date) as last_admission_date \
+from doctors \
+join admissions \
+on doctors.doctor_id = admissions.attending_doctor_id \
+group by attending_doctor_id
+
+#### 23. Display the total amount of patients for each province. Order by descending.
+
+**Solution**
+
+select province_name, count(*) as patient_count \
+from province_names \
+join patients \
+on province_names.province_id = patients.province_id \
+group by province_name \
+order by patient_count desc
