@@ -288,3 +288,13 @@ WHERE \
     AND len(patient_id) = 3 \
   )
 
+
+#### 21. Display the first name, last name and number of duplicate patients based on their first name and last name.Ex: A patient with an identical name can be considered a duplicate.
+
+**Solution**
+
+SELECT \
+first_name, last_name , count(*) as num_of_duplicates \
+FROM patients \
+group by first_name, last_name \
+having COUNT(*) > 1;
