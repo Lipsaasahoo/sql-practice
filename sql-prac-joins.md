@@ -99,3 +99,13 @@ join admissions \
 on patients.patient_id = admissions.patient_id \
 join doctors \
 on admissions.attending_doctor_id = doctors.doctor_id
+
+#### 8. Show patient_id, first_name, last_name from patients whose does not have any records in the admissions table. (Their patient_id does not exist in any admissions.patient_id rows.)
+
+SELECT patients.patient_id,
+first_name,
+last_name
+FROM patients
+Left join admissions
+on admissions.patient_id = patients.patient_id
+where admissions.patient_id is null

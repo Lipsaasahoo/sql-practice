@@ -298,3 +298,18 @@ first_name, last_name , count(*) as num_of_duplicates \
 FROM patients \
 group by first_name, last_name \
 having COUNT(*) > 1;
+
+#### 22. Display patient's full name,height in the units feet rounded to 1 decimal,weight in the unit pounds rounded to 0 decimals,birth_date,gender non abbreviated. Convert CM to feet by dividing by 30.48. Convert KG to pounds by multiplying by 2.205.
+
+**Solution**
+
+SELECT concat(first_name , ' ', last_name) as patient_name,
+round(height/30.48 , 1) as height,
+round(weight * 2.205 , 0) as weights,
+birth_date,
+CASE 
+WHEN gender = 'M' THEN 'MALE'
+WHEN gender = 'F' THEN 'FEMALE' 
+END AS gender_types
+FROM patients
+
